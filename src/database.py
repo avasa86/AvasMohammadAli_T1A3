@@ -174,4 +174,5 @@ insert_student("Aban","Bad","ab@gmail.com",30,"04445986","0455555235",95,2)
 insert_student("Cat","Dinoson","ac@gmail.com",35,"0444442344","0445555555",93,3)
 insert_student("Aprer","Aci","ad@gmail.com",36,"0445644444","0458955555",91,4)
 update_student("Aprer","Aci","ad@gmail.com",36,"0445644444","0458955555",69,1,4)
+update_subject('Geography',2)
 
