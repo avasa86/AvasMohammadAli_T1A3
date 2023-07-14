@@ -47,7 +47,7 @@ def show_subject():
 @app.command()
 def show_student():
     student_list = get_all_students()
-    console.print("[bold magenta]Subject[/bold magenta]!")
+    console.print("[bold magenta]Student[/bold magenta]")
 
     table = Table(show_header=True, header_style="bold blue")
     table.add_column("#", style="dim", width=6)
@@ -60,7 +60,7 @@ def show_student():
     table.add_column("Mark",min_width=10)
     table.add_column("Subject", min_width=20)
     for idx, student in enumerate(student_list, start=1):
-        the_stud = str(student)[1:-1]
+        the_stud = str(student)[0:-1]
         first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id = the_stud.split(',')
         table.add_row(str(idx),first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id)
     console.print(table)
