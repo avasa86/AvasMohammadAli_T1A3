@@ -36,7 +36,7 @@ def show_subject():
         the_sub = str(subject)[1:-1]
         c = get_subject_color(the_sub)
         table.add_row(str(idx), f'[{c}]{the_sub}[/{c}]')
-        console.print(table)
+    console.print(table)
 
 
 if __name__ == "__main__":
