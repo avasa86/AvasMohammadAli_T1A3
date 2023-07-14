@@ -55,14 +55,14 @@ def insert_subject(subject: Subject):
     except sqlite3.Error as e:
         print("Error inserting contact:", e)
 
-def insert_student(first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id):
+def insert_student(student:Student):
     # Connect to the SQLite database
     conn = sqlite3.connect('studentdatabase.db')
     c = conn.cursor()
 
     try:
         # Insert the contact into the table
-        c.execute("INSERT INTO student (first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id) VALUES (?,?,?,?,?,?,?,?)",(first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id))
+        c.execute("INSERT INTO student VALUES (:first_name,:last_name,:email,:age,:phone_number,:parents_phone_number,:mark,:subject_id)",{"first_name":student.first_name,"last_name":student.last_name,"email":student.email,"age":student.age,"phone_number":student.phone_number,"parents_phone_number":student.parents_phone_number,"mark":student.mark,"subject_id":student.subject_id})
 
         # Commit the changes
         conn.commit()
@@ -167,6 +167,15 @@ def get_all_subjects() -> List[Subject]:
         _,res = result
         subject_list.append(Subject(res))
     return subject_list
+
+def get_all_students() -> List[Student]:
+    c.execute('select * from student')
+    results = c.fetchall()
+    student_list = []
+    for result in results:
+        _,fname,lname,email,age,phno,p_phno,mark,subid = result
+        student_list.append(Student(fname,lname,email,age,phno,p_phno,mark,subid))
+    return student_list
 '''
 create_table()
 insert_subject('Maths')

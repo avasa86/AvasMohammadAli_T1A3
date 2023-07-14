@@ -2,7 +2,7 @@ import typer
 from rich.console import Console
 from rich.table import Table
 from model import Subject,Student
-from database import get_all_subjects,insert_subject
+from database import get_all_subjects,insert_subject,insert_student,get_all_students
 
 console = Console()
 
@@ -18,7 +18,7 @@ def add(subject_name: str):
 
 @app.command(short_help='adds a subject')
 def add(first_name: str,last_name: str,email:str,age:int,phone_number:str,parents_phone_number:str,mark:int,subject_id:int):
-    typer.echo(f"adding student details}")
+    typer.echo("adding student details")
     student = Student(first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id)
     insert_student(student)
     show_student()
@@ -45,7 +45,7 @@ def show_subject():
     console.print(table)
 
 @app.command()
-def show_subject():
+def show_student():
     student_list = get_all_students()
     console.print("[bold magenta]Subject[/bold magenta]!")
 
@@ -57,11 +57,12 @@ def show_subject():
     table.add_column("Age",min_width=5)
     table.add_column("Phone Number", min_width=20)
     table.add_column("Parent Phone Number",min_width=20)
-    table.add_columng("Mark",min_width=10)
+    table.add_column("Mark",min_width=10)
     table.add_column("Subject", min_width=20)
     for idx, student in enumerate(student_list, start=1):
-        the_stud = str(subject)[1:-1]
-        table.add_row(str(idx),the_stud)
+        the_stud = str(student)[1:-1]
+        first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id = the_stud.split(',')
+        table.add_row(str(idx),first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id)
     console.print(table)
 if __name__ == "__main__":
     app()
