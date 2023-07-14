@@ -12,7 +12,7 @@ def create_table():
                         subject_name TEXT
                     )''')
 
-        # Create the second table with a foreign key reference to the customers table
+        # Create the second table with a foreign key reference to the subject table
         c.execute('''CREATE TABLE student (
                         id INTEGER PRIMARY KEY,
                         first_name TEXT,
@@ -79,6 +79,17 @@ def insert_student(first_name,last_name,email,age,phone_number,parents_phone_num
         conn.close()
 
 
+def update_student():
+    pass
+
+def update_subject():
+    pass
+
+def delete_student():
+    pass
+
+def delete_subject():
+    pass
 create_table()
 insert_subject('Maths')
 insert_subject('Physics')
