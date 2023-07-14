@@ -1,5 +1,6 @@
 import sqlite3
-
+from typing import List
+from model import Subject,Student
 # Connect to the SQLite database
 conn = sqlite3.connect('studentdatabase.db')
 c = conn.cursor()
@@ -33,19 +34,19 @@ def create_table():
     except sqlite3.Error as e:
         print("Error creating table",e)
 
-    finally:
-        conn.close()
 
 
 
-def insert_subject(subject_name):
-    # Connect to the SQLite database
+
+def insert_subject(subject: Subject):
+    # Connect to the SQLite databases
     conn = sqlite3.connect('studentdatabase.db')
     c = conn.cursor()
 
     try:
-        # Insert the contact into the table
-        c.execute("INSERT INTO subject (subject_name) VALUES (?)",(subject_name,))
+        # Insert the contact into the tablE
+        with conn:
+            c.execute("INSERT INTO subject VALUES (:subject_name)",{"subject_name": subject.SubjectName})
 
         # Commit the changes
         conn.commit()
@@ -53,10 +54,6 @@ def insert_subject(subject_name):
 
     except sqlite3.Error as e:
         print("Error inserting contact:", e)
-
-    finally:
-        # Close the connection
-        conn.close()
 
 def insert_student(first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id):
     # Connect to the SQLite database
@@ -110,7 +107,6 @@ def update_subject(subject_name,subject_id):
     try:
         # Update the subject
         c.execute("UPDATE subject SET subject_name = ? WHERE id = ?", (subject_name,subject_id))
-
         # Commit the changes
         conn.commit()
         print("Subject updated successfully!")
@@ -163,16 +159,25 @@ def delete_subject():
         # Close the connection
         conn.close()    
   
-
+def get_all_subjects() -> List[Subject]:
+    c.execute('select * from subject')
+    results = c.fetchall()
+    subject_list = []
+    for result in results:
+        _,res = result
+        subject_list.append(Subject(res))
+    return subject_list
+'''
 create_table()
 insert_subject('Maths')
 insert_subject('Physics')
 insert_subject('Chemistry')
 insert_subject('Economics')
+
 insert_student("Avas","Ali","aa@gmail.com",29,"0444444444","0455551255",98,1)
 insert_student("Aban","Bad","ab@gmail.com",30,"04445986","0455555235",95,2)
 insert_student("Cat","Dinoson","ac@gmail.com",35,"0444442344","0445555555",93,3)
 insert_student("Aprer","Aci","ad@gmail.com",36,"0445644444","0458955555",91,4)
 update_student("Aprer","Aci","ad@gmail.com",36,"0445644444","0458955555",69,1,4)
 update_subject('Geography',2)
-
+'''

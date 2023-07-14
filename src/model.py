@@ -1,11 +1,11 @@
-class Subjects:
+class Subject:
     def __init__(self,SubjectName):
         self.SubjectName = SubjectName
 
     def __repr__(self)->str:
         return f"({self.SubjectName})"
 
-class Students:
+class Student:
     def __init__(self,FirstName,LastName,Email,Age,PhoneNumber,ParentPhoneNumber,Subject,Mark):
         self.FirstName = FirstName
         self.LastName = LastName
