@@ -6,7 +6,7 @@ class Subject:
         return f"({self.SubjectName})"
 
 class Student:
-    def __init__(self,FirstName,LastName,Email,Age,PhoneNumber,ParentPhoneNumber,Subject,Mark):
+    def __init__(self,FirstName,LastName,Email,Age,PhoneNumber,ParentPhoneNumber,Mark,Subject):
         self.FirstName = FirstName
         self.LastName = LastName
         self.Email = Email
