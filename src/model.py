@@ -1,11 +1,3 @@
-class Users:
-    def __init__(self,username,password):
-        self.username = username
-        self.password = password
-
-    def __repr__(self)->str:
-        return f"({self.username},{self.password})"
-
 class Subjects:
     def __init__(self,SubjectName):
         self.SubjectName = SubjectName
