@@ -79,11 +79,30 @@ def insert_student(first_name,last_name,email,age,phone_number,parents_phone_num
         conn.close()
 
 
-def update_student():
+def update_student(first_name,last_name,email,age,phone_number,parents_phone_number,mark,subject_id):
     pass
 
-def update_subject():
-    pass
+
+def update_subject(subject_name,subject_id):
+    # Connect to the SQLite database
+    conn = sqlite3.connect('studentdatabase.db')
+    c = conn.cursor()
+
+    try:
+        # Update the subject
+        c.execute("UPDATE subject SET subject_name = ? WHERE id = ?", (subject_name,subject_id))
+
+        # Commit the changes
+        conn.commit()
+        print("Subject updated successfully!")
+
+    except sqlite3.Error as e:
+        print("Error updating subject name:", e)
+
+    finally:
+        # Close the connection
+        conn.close()
+
 
 def delete_student():
     pass
